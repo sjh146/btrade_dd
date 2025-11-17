@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Bithumb API 설정
-BITHUMB_API_KEY = os.getenv('BITHUMB_API_KEY')
-BITHUMB_SECRET_KEY = os.getenv('BITHUMB_SECRET_KEY')
+# Upbit API 설정
+UPBIT_ACCESS_KEY = os.getenv('UPBIT_ACCESS_KEY')
+UPBIT_SECRET_KEY = os.getenv('UPBIT_SECRET_KEY')
 
 # 거래 설정
 TRADING_PAIR = 'BTC'  # 거래할 코인

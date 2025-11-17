@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request
 from trading_strategy import TradingStrategy
-from bithumb_api import BithumbTrader
+from upbit_api import UpbitTrader
 from config import FLASK_HOST, FLASK_PORT, DEBUG
 import threading
 
 app = Flask(__name__)
-trader = BithumbTrader()
+trader = UpbitTrader()
 strategy = TradingStrategy()
 strategy_thread = None
 

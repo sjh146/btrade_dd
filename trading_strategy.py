@@ -1,11 +1,11 @@
 import time
 from datetime import datetime
 from config import INVESTMENT_AMOUNT, STOP_LOSS_PERCENT, TAKE_PROFIT_PERCENT
-from bithumb_api import BithumbTrader
+from upbit_api import UpbitTrader
 
 class TradingStrategy:
     def __init__(self):
-        self.trader = BithumbTrader()
+        self.trader = UpbitTrader()
         self.last_buy_price = 0
         self.position = False
         self.investment_amount = INVESTMENT_AMOUNT
@@ -56,11 +56,12 @@ class TradingStrategy:
         """매도 실행"""
         try:
             balance = self.trader.get_balance()
-            if balance and balance[0] > 0:  # 보유 수량이 있는 경우
-                order_id = self.trader.place_sell_order(price, balance[0])
+            if balance and balance.get('total_coin', 0) > 0:  # 보유 수량이 있는 경우
+                coin_amount = balance['total_coin']
+                order_id = self.trader.place_sell_order(price, coin_amount)
                 if order_id:
                     self.position = False
-                    print(f"[{datetime.now()}] {reason} 매도 주문 실행: {price}원, {balance[0]}개")
+                    print(f"[{datetime.now()}] {reason} 매도 주문 실행: {price}원, {coin_amount}개")
         except Exception as e:
             print(f"매도 실행 중 오류 발생: {e}")
 
